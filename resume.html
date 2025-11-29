@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Portfolio</title>
+    <link rel="stylesheet" href="portfolio.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <style>
+      .header a {
+        text-decoration: none;
+        color: black;
+        font-weight: 600;
+        transition: all 0.5s;
+      }
+
+      .header ul a:hover {
+        text-decoration: underline;
+        text-underline-offset: 10px;
+        color: black;
+      }
+
+      .search button {
+        background-color: black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="preloader"></div>
+
+    <header class="header py-3">
+      <div class="container-fluid px-3 px-md-4">
+        <div class="row">
+          <div
+            class="col-3 col-md-2 d-flex justify-content-center align-items-center"
+          >
+            <div class="logo">
+              <h2>NAJIB.</h2>
+            </div>
+          </div>
+          <div
+            class="col-6 col-md-8 d-flex justify-content-center align-items-center"
+            id="search_in"
+          >
+            <ul class="d-flex gap-3 gap-lg-5 m-0 p-0" id="ull">
+              <li><a href="index.html">HOME</a></li>
+              <li><a href="about.html">ABOUT</a></li>
+              <li><a href="book.html">BOOKS</a></li>
+              <li><a href="project.html">PROJECTS</a></li>
+              <li><a href="contact.html">CONTACT US</a></li>
+            </ul>
+          </div>
+          <div
+            class="col-3 col-md-2 d-flex justify-content-md-center justify-content-end align-items-center"
+            id="tab_in"
+          >
+            <div class="search w-100">
+              <input
+                type="search"
+                placeholder="Search here!"
+                class="ps-3 w-75"
+              />
+              <button class="search-button w-25" onclick="search()">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="resume py-5">
+      <div class="container-fluid px-4 pb-5">
+        <div class="row pt-3">
+          <div class="col-12 w-100 d-md-flex justify-content-md-center">
+            <div class="box">
+              <div class="title d-flex flex-column align-items-center mb-3">
+                <h1>RESUME</h1>
+                <img src="images/line.png" alt="" />
+              </div>
+              <p class="px-0 px-sm-5">
+               "I am a Front-End Web Developer with strong skills in HTML, CSS, JavaScript, and React.js. I specialize in creating responsive, user-friendly, and visually appealing websites. I enjoy building clean UI designs, adding interactive features, and optimizing website performance. I am always learning new technologies and improving my development skills to build better, faster, and more professional web applications."
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="mt-4 mx-0 mx-sm-5 py-2 py-sm-3 px-2 px-sm-3 sameButton"
+          onclick="window.location.href='Engr-Najib-CV.pdf'"
+        >
+          Download Complete CV
+        </button>
+
+        <div class="row px-0 px-sm-5 py-3">
+          <div class="col-lg-6">
+            <h3 class="resume-title">Education</h3>
+            <div class="resume-item">
+              <h4>BSC Software Engineering</h4>
+              <h5>2020 - 2024</h5>
+              <p><em>University Of Science & Technology, Bannu</em></p>
+              <p></p>
+            </div>
+            <div class="resume-item">
+              <h4>FSC Pre Engineering</h4>
+              <h5>2017 - 2020</h5>
+              <p><em>Government Post Graduate College, Lakki Marwat</em></p>
+              <p>Position: 805/1100 Marks</p>
+            </div>
+            <div class="resume-item">
+              <h4>Matric -  Lakki &nbsp; Marwat</h4>
+              <h5>2017 - 2019</h5>
+              <p><em>G.H.S Matora, Lakki Marwat</em></p>
+              <p>Position: 799/1100 Marks</p>
+            </div>
+
+            <h3 class="resume-title">Hard Skills</h3>
+            <div class="resume-item">
+              <h4>Languages</h4>
+              <ul>
+                <li>
+                  <p>HTML</p>
+                  <p>CSS</p>
+                  <p>JavaScript</p>
+                  <p>React.js</p>
+                  
+                </li>
+              </ul>
+              <h4>Frameworks & Libraries</h4>
+              <ul>
+                <li>
+                  
+                  <p>Tailwind CSS</p>
+                  <p>Bootstrap</p>
+                  
+                 
+                 
+                </li>
+              </ul>
+              <h4>Tools</h4>
+              <ul>
+                <li>
+                  <p>Git</p>
+                  <p>GitHub</p>
+                 
+              </ul>
+             
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h3 class="resume-title">Professional Experience</h3>
+            <div class="resume-item">
+              
+            <div class="resume-item">
+              <h4>Website Development InternShip</h4>
+              <h5>June 2023 - September 2023</h5>
+              <p>
+                <em
+                  >Khyber Pakhtunkhwa Information Technology Board</em
+                >
+              </p>
+              <ul>
+                <b> Key responsibilities: </b>
+                <li>
+                  <p>
+                    Developed and maintained websites for small businesses using
+                    HTML, CSS, JavaScript, and WordPress.
+                  </p>
+                </li>
+                <li><p>Customized WordPress themes and plugins.</p></li>
+               
+               
+              </ul>
+            </div>
+            <div class="resume-item">
+              <h4>Courses & Certifications</h4>
+              <h5>Web Development</h5>
+               <ul>
+                <li>
+                  <b>1. <em> Website development Certificate</em></b>
+                  <ul>
+                    <p>
+                     Khyber Pakhtunkhwa Information Technology Board <br> Duration: 2
+                  months
+                    </p>
+                  </ul>
+                </li>
+                <li>
+                  
+                </li>
+                <li>
+                  <b>3. <em> HTML & CSS & Js Courses</em></b>
+                  <ul>
+                    <p>
+                      Yahoo Baba youtube Channel & W3 School Website
+                    </p>
+                  </ul>
+                </li>
+              </ul>
+              
+                 
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer py-5">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="f-link mb-3">
+              <a
+                href="https://www.facebook.com/profile.php?id=61551044190342"
+                target="_blank"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="https://wa.me/03446580048" target="_blank"
+                ><i class="fa-brands fa-whatsapp"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/in/najib-ullah-khan-65b298267/"
+                target="_blank"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+            </div>
+            <p>Copyright © 2024 All Rights Reserved</p>
+            <p>
+              Designed By
+              <a
+                href="https://www.linkedin.com/in/najib-ullah-khan-65b298267/"
+                id="design"
+                >Najib Ullah Khan</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="portfolio.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
