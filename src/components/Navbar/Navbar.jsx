@@ -85,10 +85,22 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="/"
-          className="text-2xl font-extrabold text-gradient cursor-pointer tracking-wider hover:opacity-80 transition-opacity duration-300"
+          className="group flex items-center gap-0.5 cursor-pointer hover:opacity-80 transition-opacity duration-300"
           aria-label="NU - Najib Ullah Khan"
         >
-          NU<span className="text-gold">.</span>
+          {/* Main Logo Text */}
+          <div className="flex items-baseline">
+            <span className="text-3xl font-extrabold tracking-tight text-[var(--text)]">NU</span>
+            <span className="relative flex items-center justify-center w-[10px] h-[10px] mt-3 ml-0.5">
+              <svg width="10" height="10" viewBox="0 0 10 10" className="absolute">
+                <circle cx="5" cy="5" r="4.5" fill="#c1a46a" />
+              </svg>
+            </span>
+          </div>
+          {/* Tagline */}
+          <span className="block text-[9px] font-bold tracking-[0.3em] text-[var(--text-dim)] uppercase mt-0.5">
+            architect
+          </span>
         </a>
 
         {/* Desktop Links */}
