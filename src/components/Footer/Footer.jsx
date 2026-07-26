@@ -1,4 +1,5 @@
 import { personalInfo } from '../../data/personalInfo';
+import Logo from '../Common/Logo';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -9,9 +10,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
           <div>
-            <h2 className="text-2xl font-extrabold text-gradient mb-4">
-              NU<span className="text-gold">.</span>
-            </h2>
+            <div className="mb-4">
+              <Logo size="md" />
+            </div>
             <p className="text-[var(--text-muted)] text-sm leading-relaxed mb-6">
               Front-End Developer crafting clean, responsive web experiences.
               Let's build something exceptional together.
@@ -74,9 +75,7 @@ export default function Footer() {
           <p className="text-[var(--text-dim)] text-xs text-center md:text-left">
             © {year} {personalInfo.name}. All rights reserved.
           </p>
-          <p className="text-[var(--text-dim)] text-xs flex items-center gap-1.5">
-            Built with <i className="fas fa-heart text-gold text-[10px]" /> using React.js & Tailwind CSS
-          </p>
+          <Logo size="sm" />
         </div>
       </div>
     </footer>

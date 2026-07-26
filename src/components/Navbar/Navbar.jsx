@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-scroll';
+import Logo from '../Common/Logo';
 
 const navLinks = [
   { to: 'hero', label: 'Home' },
@@ -85,22 +86,10 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="/"
-          className="group flex items-center gap-0.5 cursor-pointer hover:opacity-80 transition-opacity duration-300"
-          aria-label="NU - Najib Ullah Khan"
+          className="group inline-flex cursor-pointer hover:opacity-90 transition-opacity duration-300"
+          aria-label="NUK - Najib Ullah Khan"
         >
-          {/* Main Logo Text */}
-          <div className="flex items-baseline">
-            <span className="text-3xl font-extrabold tracking-tight text-[var(--text)]">NU</span>
-            <span className="relative flex items-center justify-center w-[10px] h-[10px] mt-3 ml-0.5">
-              <svg width="10" height="10" viewBox="0 0 10 10" className="absolute">
-                <circle cx="5" cy="5" r="4.5" fill="#c1a46a" />
-              </svg>
-            </span>
-          </div>
-          {/* Tagline */}
-          <span className="block text-[9px] font-bold tracking-[0.3em] text-[var(--text-dim)] uppercase mt-0.5">
-            architect
-          </span>
+          <Logo size="md" />
         </a>
 
         {/* Desktop Links */}
