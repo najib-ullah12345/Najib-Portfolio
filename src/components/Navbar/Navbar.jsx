@@ -84,9 +84,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-8 flex items-center justify-between h-[72px]">
         {/* Logo */}
         <a
-          href="https://github.com/najib-ullah12345"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/"
           className="text-2xl font-extrabold text-gradient cursor-pointer tracking-wider hover:opacity-80 transition-opacity duration-300"
           aria-label="NU - Najib Ullah Khan"
         >
