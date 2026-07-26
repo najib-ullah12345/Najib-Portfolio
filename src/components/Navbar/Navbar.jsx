@@ -83,15 +83,15 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-8 flex items-center justify-between h-[72px]">
         {/* Logo */}
-        <Link
-          to="hero"
-          smooth
-          duration={600}
-          offset={0}
-          className="text-xl font-extrabold text-gradient cursor-pointer tracking-wide"
+        <a
+          href="https://github.com/najib-ullah12345"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-2xl font-extrabold text-gradient cursor-pointer tracking-wider hover:opacity-80 transition-opacity duration-300"
+          aria-label="NU - Najib Ullah Khan"
         >
-          NAJIB<span className="text-gold">.</span>
-        </Link>
+          NU<span className="text-gold">.</span>
+        </a>
 
         {/* Desktop Links */}
         <ul className="hidden lg:flex items-center gap-1">
