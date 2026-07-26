@@ -13,7 +13,7 @@ export default function Projects() {
         {/* Header */}
         <div ref={ref} className={`text-center mb-16 reveal ${visible ? 'visible' : ''}`}>
           <p className="text-gold text-xs font-bold tracking-[0.3em] uppercase mb-3">My Work</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Featured Projects</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--text)] mb-4">Featured Projects</h2>
           <div className="divider divider-center" />
         </div>
 
@@ -52,8 +52,8 @@ export default function Projects() {
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-white font-bold text-base mb-2">{project.title}</h3>
-                <p className="text-[#7a7a8c] text-xs leading-relaxed mb-4 line-clamp-2">
+                <h3 className="text-[var(--text)] font-bold text-base mb-2">{project.title}</h3>
+                <p className="text-[var(--text-muted)] text-xs leading-relaxed mb-4 line-clamp-2">
                   {project.description}
                 </p>
 
@@ -67,7 +67,7 @@ export default function Projects() {
                 </div>
 
                 {/* Meta */}
-                <div className="flex items-center justify-between text-[10px] text-[#4a4a5c] pt-3 border-t border-white/[0.05]">
+                <div className="flex items-center justify-between text-[10px] text-[var(--text-dim)] pt-3 border-t border-[var(--border)]">
                   <span className="flex items-center gap-1">
                     <i className="fas fa-user text-gold/50" />
                     {project.role}
@@ -84,7 +84,7 @@ export default function Projects() {
 
         {/* GitHub CTA */}
         <div ref={ref} className={`text-center mt-16 reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.5s' }}>
-          <p className="text-[#4a4a5c] text-xs tracking-widest uppercase mb-4">More on GitHub</p>
+          <p className="text-[var(--text-dim)] text-xs tracking-widest uppercase mb-4">More on GitHub</p>
           <a
             href="https://github.com/najib-ullah12345"
             target="_blank"

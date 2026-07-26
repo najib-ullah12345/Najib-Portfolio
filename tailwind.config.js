@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -14,15 +15,20 @@ export default {
         'dark-2': '#111117',
         'dark-3': '#18181f',
         'dark-4': '#1f1f28',
-        text: '#e0e0e8',
-        'text-muted': '#7a7a8c',
-        'text-dim': '#4a4a5c',
+        light: '#f8f8fc',
+        'light-2': '#eeeef2',
+        'light-3': '#e4e4ea',
+        'light-4': '#d8d8e0',
+        text: '#1a1a2e',
+        'text-muted': '#5a5a6e',
+        'text-dim': '#8a8a9c',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
       },
       borderColor: {
         border: 'rgba(255,255,255,0.07)',
+        'border-light': 'rgba(0,0,0,0.08)',
       },
     },
   },

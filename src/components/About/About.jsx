@@ -5,7 +5,7 @@ export default function About() {
   const [ref, visible] = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <section id="about" className="section bg-[#0b0b0f] relative overflow-hidden">
+    <section id="about" className="section bg-[var(--bg-2)] relative overflow-hidden">
       {/* Background grid */}
       <div className="absolute inset-0 bg-grid opacity-40" />
 
@@ -13,7 +13,7 @@ export default function About() {
         {/* Section Header */}
         <div ref={ref} className={`text-center mb-20 reveal ${visible ? 'visible' : ''}`}>
           <p className="text-gold text-xs font-bold tracking-[0.3em] uppercase mb-3">Get to know me</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">About Me</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--text)] mb-4">About Me</h2>
           <div className="divider divider-center" />
         </div>
 
@@ -31,14 +31,14 @@ export default function About() {
               {/* Experience badge */}
               <div className="absolute -bottom-5 -right-5 glass-card px-5 py-4 text-center">
                 <p className="text-3xl font-extrabold text-gradient">3+</p>
-                <p className="text-[#7a7a8c] text-xs mt-0.5">Years Learning</p>
+                <p className="text-[var(--text-muted)] text-xs mt-0.5">Years Learning</p>
               </div>
             </div>
           </div>
 
           {/* ── RIGHT: Content ── */}
           <div className={`reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.2s' }}>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+            <h3 className="text-2xl md:text-3xl font-bold text-[var(--text)] mb-2">
               I'm <span className="text-gradient">{personalInfo.name}</span>
             </h3>
             <p className="text-gold text-sm font-medium mb-6">{personalInfo.title}</p>
@@ -47,7 +47,7 @@ export default function About() {
             <div className="divider mb-6" />
 
             {personalInfo.bio.split('\n\n').map((para, i) => (
-              <p key={i} className="text-[#7a7a8c] leading-relaxed mb-4 text-sm md:text-base">
+              <p key={i} className="text-[var(--text-muted)] leading-relaxed mb-4 text-sm md:text-base">
                 {para}
               </p>
             ))}
@@ -65,8 +65,8 @@ export default function About() {
                     <i className={`fas ${icon} text-gold text-xs`} />
                   </div>
                   <div>
-                    <p className="text-[#4a4a5c] text-xs">{label}</p>
-                    <p className="text-white text-sm font-medium leading-tight">{value}</p>
+                    <p className="text-[var(--text-dim)] text-xs">{label}</p>
+                    <p className="text-[var(--text)] text-sm font-medium leading-tight">{value}</p>
                   </div>
                 </div>
               ))}

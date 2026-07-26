@@ -39,7 +39,7 @@ export default function Hero() {
     <section
       id="hero"
       className="relative min-h-screen flex items-center overflow-hidden bg-grid"
-      style={{ background: '#0b0b0f' }}
+      style={{ background: 'var(--bg)' }}
     >
       {/* Ambient glow */}
       <div className="absolute top-[-10%] right-[10%] w-[600px] h-[600px] bg-gold/[0.04] rounded-full blur-[120px] pointer-events-none" />
@@ -53,14 +53,14 @@ export default function Hero() {
             <p className="text-gold text-sm font-semibold tracking-[0.25em] uppercase mb-4">
               Hi, I'm
             </p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-3 leading-[1.05]">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-[var(--text)] mb-3 leading-[1.05]">
               Najib Ullah<br />
               <span className="text-gradient">Khan</span>
             </h1>
 
             {/* Typewriter */}
             <div className="flex items-center gap-2 mb-6 h-10">
-              <span className="text-xl md:text-2xl font-semibold text-[#7a7a8c]">
+              <span className="text-xl md:text-2xl font-semibold text-[var(--text-muted)]">
                 A
               </span>
               <span className="text-xl md:text-2xl font-bold text-gradient">
@@ -69,7 +69,7 @@ export default function Hero() {
               <span className="text-gold text-2xl animate-blink">|</span>
             </div>
 
-            <p className="text-[#7a7a8c] text-base md:text-lg leading-relaxed mb-8 max-w-md">
+            <p className="text-[var(--text-muted)] text-base md:text-lg leading-relaxed mb-8 max-w-md">
               {personalInfo.tagline}
             </p>
 
@@ -86,7 +86,7 @@ export default function Hero() {
             </div>
 
             {/* Stats row */}
-            <div className="flex gap-8 mt-12 pt-8 border-t border-white/[0.06]">
+            <div className="flex gap-8 mt-12 pt-8 border-t border-[var(--border)]">
               {[
                 { num: '7+', label: 'Projects' },
                 { num: '3+', label: 'Certifications' },
@@ -94,7 +94,7 @@ export default function Hero() {
               ].map(({ num, label }) => (
                 <div key={label}>
                   <p className="text-3xl font-extrabold text-gradient">{num}</p>
-                  <p className="text-[#7a7a8c] text-xs mt-1">{label}</p>
+                  <p className="text-[var(--text-muted)] text-xs mt-1">{label}</p>
                 </div>
               ))}
             </div>
@@ -118,7 +118,7 @@ export default function Hero() {
                   <span className="w-2.5 h-2.5 rounded-full bg-green-400 block" />
                   <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-60" />
                 </div>
-                <span className="text-white text-xs font-medium">Available for work</span>
+                <span className="text-[var(--text)] text-xs font-medium">Available for work</span>
               </div>
 
               {/* Floating badge */}
@@ -132,7 +132,7 @@ export default function Hero() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-          <span className="text-[#4a4a5c] text-xs tracking-widest uppercase">Scroll</span>
+          <span className="text-[var(--text-dim)] text-xs tracking-widest uppercase">Scroll</span>
           <div className="w-px h-12 bg-gradient-to-b from-gold/40 to-transparent" />
         </div>
       </div>

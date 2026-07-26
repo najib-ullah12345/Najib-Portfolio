@@ -11,14 +11,14 @@ export default function Skills() {
   const [ref, visible] = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <section id="skills" className="section bg-[#111117] relative">
+    <section id="skills" className="section bg-[var(--bg-3)] relative">
       <div className="absolute inset-0 bg-grid opacity-30" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-8">
         {/* Header */}
         <div ref={ref} className={`text-center mb-16 reveal ${visible ? 'visible' : ''}`}>
           <p className="text-gold text-xs font-bold tracking-[0.3em] uppercase mb-3">What I know</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Technical Skills</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--text)] mb-4">Technical Skills</h2>
           <div className="divider divider-center" />
         </div>
 
@@ -35,14 +35,14 @@ export default function Skills() {
                 <i className={`fas ${categoryIcons[group.category] || 'fa-code'} text-gold text-xl`} />
               </div>
 
-              <h3 className="text-white font-bold text-lg mb-8">{group.category}</h3>
+              <h3 className="text-[var(--text)] font-bold text-lg mb-8">{group.category}</h3>
 
               {/* Skills with progress */}
               <div className="space-y-6">
                 {group.items.map((skill) => (
                   <div key={skill.name}>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-[#c0c0d0]">{skill.name}</span>
+                      <span className="text-sm font-medium text-[var(--text)]">{skill.name}</span>
                       <span className="text-xs text-gold font-bold">{skill.level}%</span>
                     </div>
                     <div className="progress-track">
@@ -63,7 +63,7 @@ export default function Skills() {
 
         {/* Additional Skills Badges */}
         <div ref={ref} className={`text-center reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.5s' }}>
-          <p className="text-[#4a4a5c] text-xs font-bold tracking-[0.2em] uppercase mb-6">
+          <p className="text-[var(--text-dim)] text-xs font-bold tracking-[0.2em] uppercase mb-6">
             Also Familiar With
           </p>
           <div className="flex flex-wrap justify-center gap-3">

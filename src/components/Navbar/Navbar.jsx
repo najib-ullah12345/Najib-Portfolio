@@ -13,6 +13,27 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light') {
+      setDarkMode(false);
+      document.body.classList.add('light');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    if (newMode) {
+      document.body.classList.remove('light');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.add('light');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -24,7 +45,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[#0b0b0f]/95 backdrop-blur-2xl border-b border-white/[0.05] shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
+          ? 'bg-[var(--nav-bg)] backdrop-blur-2xl border-b border-[var(--border)] shadow-[0_4px_30px_rgba(0,0,0,0.15)]'
           : 'bg-transparent'
       }`}
     >
@@ -37,7 +58,7 @@ export default function Navbar() {
           offset={0}
           className="text-xl font-bold text-gradient cursor-pointer tracking-wide"
         >
-          NAJIB<span className="text-gold">.</span>
+          NU<span className="text-gold">.</span>
         </Link>
 
         {/* Desktop Links */}
@@ -59,7 +80,19 @@ export default function Navbar() {
         </ul>
 
         {/* Right side */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="w-9 h-9 rounded-lg border border-white/10 dark:border-white/10 light:border-black/10 flex items-center justify-center text-[#7a7a8c] hover:text-gold hover:border-gold/30 transition-all duration-300"
+          >
+            {darkMode ? (
+              <i className="fas fa-sun text-sm" />
+            ) : (
+              <i className="fas fa-moon text-sm" />
+            )}
+          </button>
           <a
             href="https://github.com/najib-ullah12345"
             target="_blank"
@@ -86,7 +119,7 @@ export default function Navbar() {
             Resume
           </a>
           <button
-            className="lg:hidden text-[#e0e0e8] text-xl p-2"
+            className="lg:hidden text-[#e0e0e8] dark:text-[#e0e0e8] light:text-[#1a1a2e] text-xl p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -97,7 +130,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[#0b0b0f]/98 backdrop-blur-2xl border-t border-white/[0.05] px-6 pb-6">
+        <div className="lg:hidden bg-[var(--bg)]/98 backdrop-blur-2xl border-t border-[var(--border)] px-6 pb-6">
           <ul className="flex flex-col gap-1 pt-4">
             {navLinks.map(({ to, label }) => (
               <li key={to}>
@@ -115,6 +148,14 @@ export default function Navbar() {
             ))}
           </ul>
           <div className="flex gap-3 mt-4">
+            {/* Theme Toggle Mobile */}
+            <button
+              onClick={toggleTheme}
+              className="btn-outline text-xs py-2 px-4"
+            >
+              <i className={darkMode ? 'fas fa-sun' : 'fas fa-moon'} />
+              {darkMode ? 'Light Mode' : 'Dark Mode'}
+            </button>
             <a
               href="/Engr-Najib-CV.pdf"
               download

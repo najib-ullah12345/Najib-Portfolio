@@ -5,14 +5,14 @@ export default function Experience() {
   const [ref, visible] = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <section id="experience" className="section bg-[#0b0b0f] relative">
+    <section id="experience" className="section bg-[var(--bg-2)] relative">
       <div className="absolute inset-0 bg-grid opacity-30" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-8">
         {/* Header */}
         <div ref={ref} className={`text-center mb-16 reveal ${visible ? 'visible' : ''}`}>
           <p className="text-gold text-xs font-bold tracking-[0.3em] uppercase mb-3">My Journey</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Experience</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--text)] mb-4">Experience</h2>
           <div className="divider divider-center" />
         </div>
 
@@ -23,7 +23,7 @@ export default function Experience() {
               <div className="w-10 h-10 rounded-xl bg-gold/[0.08] flex items-center justify-center">
                 <i className="fas fa-briefcase text-gold" />
               </div>
-              <h3 className="text-white font-bold text-xl">Work Experience</h3>
+              <h3 className="text-[var(--text)] font-bold text-xl">Work Experience</h3>
             </div>
 
             <div className="relative pl-6">
@@ -34,14 +34,14 @@ export default function Experience() {
                   <div className={`glass-card p-6 reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.1s' }}>
                     <div className="flex items-start justify-between flex-wrap gap-2 mb-3">
                       <div>
-                        <h4 className="text-white font-bold text-base">{exp.title}</h4>
+                        <h4 className="text-[var(--text)] font-bold text-base">{exp.title}</h4>
                         <p className="text-gold text-xs font-medium mt-0.5">{exp.company}</p>
                       </div>
                       <span className="text-xs font-medium px-3 py-1 rounded-full bg-gold/[0.08] text-gold border border-gold/[0.15]">
                         {exp.type}
                       </span>
                     </div>
-                    <div className="flex flex-wrap gap-4 mb-4 text-xs text-[#7a7a8c]">
+                    <div className="flex flex-wrap gap-4 mb-4 text-xs text-[var(--text-muted)]">
                       <span className="flex items-center gap-1.5">
                         <i className="fas fa-calendar text-gold/50 text-[10px]" />
                         {exp.period}
@@ -51,10 +51,10 @@ export default function Experience() {
                         {exp.location}
                       </span>
                     </div>
-                    <p className="text-[#7a7a8c] text-xs leading-relaxed mb-4">{exp.description}</p>
+                    <p className="text-[var(--text-muted)] text-xs leading-relaxed mb-4">{exp.description}</p>
                     <ul className="space-y-2">
                       {exp.responsibilities.map((r, i) => (
-                        <li key={i} className="flex items-start gap-2 text-[#7a7a8c] text-xs">
+                        <li key={i} className="flex items-start gap-2 text-[var(--text-muted)] text-xs">
                           <i className="fas fa-check text-gold/60 text-[10px] mt-0.5 flex-shrink-0" />
                           {r}
                         </li>
@@ -72,7 +72,7 @@ export default function Experience() {
               <div className="w-10 h-10 rounded-xl bg-gold/[0.08] flex items-center justify-center">
                 <i className="fas fa-certificate text-gold" />
               </div>
-              <h3 className="text-white font-bold text-xl">Certifications</h3>
+              <h3 className="text-[var(--text)] font-bold text-xl">Certifications</h3>
             </div>
 
             <div className="space-y-5">
@@ -86,9 +86,9 @@ export default function Experience() {
                     <i className="fas fa-award text-gold text-xl" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-sm mb-0.5">{cert.title}</h4>
-                    <p className="text-[#7a7a8c] text-xs">{cert.issuer}</p>
-                    <p className="text-[#4a4a5c] text-xs italic mt-1">{cert.description}</p>
+                    <h4 className="text-[var(--text)] font-bold text-sm mb-0.5">{cert.title}</h4>
+                    <p className="text-[var(--text-muted)] text-xs">{cert.issuer}</p>
+                    <p className="text-[var(--text-dim)] text-xs italic mt-1">{cert.description}</p>
                     <span className="inline-block mt-2 text-xs font-bold px-3 py-1 rounded-full bg-gold/[0.08] text-gold border border-gold/[0.15]">
                       {cert.year}
                     </span>
@@ -108,11 +108,11 @@ export default function Experience() {
                     className="w-16 h-16 rounded-xl object-cover"
                   />
                   <div>
-                    <h4 className="text-white font-bold text-sm">1st Position in Class</h4>
-                    <p className="text-[#7a7a8c] text-xs">KPITB Internship Program</p>
+                    <h4 className="text-[var(--text)] font-bold text-sm">1st Position in Class</h4>
+                    <p className="text-[var(--text-muted)] text-xs">KPITB Internship Program</p>
                   </div>
                 </div>
-                <p className="text-[#7a7a8c] text-xs leading-relaxed">
+                <p className="text-[var(--text-muted)] text-xs leading-relaxed">
                   Awarded 1st position during my web development internship, demonstrating excellence in
                   practical web development skills.
                 </p>

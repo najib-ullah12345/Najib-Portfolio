@@ -13,12 +13,12 @@ export default function SectionTitle({ eyebrow, title, subtitle, center = true }
           {eyebrow}
         </p>
       )}
-      <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--text)] mb-4">
         {title}
       </h2>
       <div className={`divider ${center ? 'divider-center' : ''} mb-6`} />
       {subtitle && (
-        <p className="text-[#7a7a8c] text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+        <p className="text-[var(--text-muted)] text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
           {subtitle}
         </p>
       )}
