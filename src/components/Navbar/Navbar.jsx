@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-scroll';
 
 const navLinks = [
@@ -7,6 +7,7 @@ const navLinks = [
   { to: 'skills', label: 'Skills' },
   { to: 'experience', label: 'Experience' },
   { to: 'projects', label: 'Portfolio' },
+  { to: 'education', label: 'Education' },
   { to: 'contact', label: 'Contact' },
 ];
 
@@ -14,7 +15,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
+  const [activeSection, setActiveSection] = useState('hero');
+  const observerRef = useRef(null);
 
+  // Theme setup
   useEffect(() => {
     const stored = localStorage.getItem('theme');
     if (stored === 'light') {
@@ -35,17 +39,45 @@ export default function Navbar() {
     }
   };
 
+  // Scroll detection for navbar background
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Active section tracking via Intersection Observer
+  useEffect(() => {
+    const sections = navLinks.map((l) => document.getElementById(l.to)).filter(Boolean);
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: '-70px 0px -40% 0px' }
+    );
+
+    sections.forEach((s) => observerRef.current.observe(s));
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
+  const linkClass = (to) =>
+    `px-4 py-2 text-sm font-medium transition-all duration-300 cursor-pointer rounded-lg ${
+      activeSection === to
+        ? 'text-gold bg-gold/[0.08]'
+        : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--border)]'
+    }`;
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[var(--nav-bg)] backdrop-blur-2xl border-b border-[var(--border)] shadow-[0_4px_30px_rgba(0,0,0,0.15)]'
+          ? 'bg-[var(--bg)]/95 backdrop-blur-2xl border-b border-[var(--border)] shadow-[0_4px_30px_rgba(0,0,0,0.15)]'
           : 'bg-transparent'
       }`}
     >
@@ -56,9 +88,9 @@ export default function Navbar() {
           smooth
           duration={600}
           offset={0}
-          className="text-xl font-bold text-gradient cursor-pointer tracking-wide"
+          className="text-xl font-extrabold text-gradient cursor-pointer tracking-wide"
         >
-          NU<span className="text-gold">.</span>
+          NAJIB<span className="text-gold">.</span>
         </Link>
 
         {/* Desktop Links */}
@@ -70,8 +102,8 @@ export default function Navbar() {
                 smooth
                 duration={600}
                 offset={-70}
-                className="px-4 py-2 text-sm font-medium text-[#7a7a8c] hover:text-gold transition-all duration-300 cursor-pointer rounded-lg hover:bg-white/[0.04]"
-                activeClass="text-gold"
+                className={linkClass(to)}
+                onClick={() => setActiveSection(to)}
               >
                 {label}
               </Link>
@@ -85,7 +117,7 @@ export default function Navbar() {
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="w-9 h-9 rounded-lg border border-white/10 dark:border-white/10 light:border-black/10 flex items-center justify-center text-[#7a7a8c] hover:text-gold hover:border-gold/30 transition-all duration-300"
+            className="w-9 h-9 rounded-lg border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-gold hover:border-gold/30 transition-all duration-300"
           >
             {darkMode ? (
               <i className="fas fa-sun text-sm" />
@@ -93,12 +125,13 @@ export default function Navbar() {
               <i className="fas fa-moon text-sm" />
             )}
           </button>
+
           <a
             href="https://github.com/najib-ullah12345"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="hidden lg:flex w-9 h-9 rounded-lg border border-white/10 items-center justify-center text-[#7a7a8c] hover:text-gold hover:border-gold/30 transition-all duration-300"
+            className="hidden lg:flex w-9 h-9 rounded-lg border border-[var(--border)] items-center justify-center text-[var(--text-muted)] hover:text-gold hover:border-gold/30 transition-all duration-300"
           >
             <i className="fab fa-github text-sm" />
           </a>
@@ -107,7 +140,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="hidden lg:flex w-9 h-9 rounded-lg border border-white/10 items-center justify-center text-[#7a7a8c] hover:text-gold hover:border-gold/30 transition-all duration-300"
+            className="hidden lg:flex w-9 h-9 rounded-lg border border-[var(--border)] items-center justify-center text-[var(--text-muted)] hover:text-gold hover:border-gold/30 transition-all duration-300"
           >
             <i className="fab fa-linkedin-in text-sm" />
           </a>
@@ -119,7 +152,7 @@ export default function Navbar() {
             Resume
           </a>
           <button
-            className="lg:hidden text-[#e0e0e8] dark:text-[#e0e0e8] light:text-[#1a1a2e] text-xl p-2"
+            className="lg:hidden text-[var(--text)] text-xl p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -139,28 +172,20 @@ export default function Navbar() {
                   smooth
                   duration={600}
                   offset={-70}
-                  onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-sm font-medium text-[#7a7a8c] hover:text-gold transition-colors rounded-lg"
+                  onClick={() => { setMobileOpen(false); setActiveSection(to); }}
+                  className={linkClass(to)}
                 >
                   {label}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="flex gap-3 mt-4">
-            {/* Theme Toggle Mobile */}
-            <button
-              onClick={toggleTheme}
-              className="btn-outline text-xs py-2 px-4"
-            >
+          <div className="flex flex-wrap gap-3 mt-4">
+            <button onClick={toggleTheme} className="btn-outline text-xs py-2 px-4">
               <i className={darkMode ? 'fas fa-sun' : 'fas fa-moon'} />
               {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
-            <a
-              href="/Engr-Najib-CV.pdf"
-              download
-              className="btn-gold text-xs py-2 px-4"
-            >
+            <a href="/Engr-Najib-CV.pdf" download className="btn-gold text-xs py-2 px-4">
               Resume
             </a>
             <a
