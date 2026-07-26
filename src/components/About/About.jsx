@@ -1,95 +1,84 @@
-import SectionTitle from '../Common/SectionTitle';
-import { personalInfo } from '../../data/personalInfo';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-
-const stats = [
-  { value: '7+', label: 'Projects Built' },
-  { value: '3+', label: 'Certifications' },
-  { value: '1', label: 'Internship' },
-];
+import { personalInfo } from '../../data/personalInfo';
 
 export default function About() {
-  const [ref, visible] = useScrollReveal({ threshold: 0.2 });
+  const [ref, visible] = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <section id="about" className="section-pad bg-dark-2 relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gold/[0.02] to-transparent pointer-events-none" />
+    <section id="about" className="section bg-[#0b0b0f] relative overflow-hidden">
+      {/* Background grid */}
+      <div className="absolute inset-0 bg-grid opacity-40" />
 
-      <div className="max-w-6xl mx-auto px-6">
-        <SectionTitle
-          eyebrow="About Me"
-          title="Crafting Digital Experiences"
-          subtitle="Passionate front-end developer focused on building clean, responsive, and user-centric web applications."
-        />
+      <div className="relative z-10 max-w-6xl mx-auto px-8">
+        {/* Section Header */}
+        <div ref={ref} className={`text-center mb-20 reveal ${visible ? 'visible' : ''}`}>
+          <p className="text-gold text-xs font-bold tracking-[0.3em] uppercase mb-3">Get to know me</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">About Me</h2>
+          <div className="divider divider-center" />
+        </div>
 
-        <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Image side */}
-          <div className={`reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.1s' }}>
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gold/10 rounded-2xl blur-xl" />
+        <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          {/* ── LEFT: Avatar ── */}
+          <div className={`relative reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.1s' }}>
+            <div className="relative inline-block">
+              <div className="absolute -inset-4 bg-gold/[0.08] rounded-2xl blur-2xl" />
               <img
                 src="/images/pic.jpeg"
                 alt={personalInfo.name}
                 className="relative rounded-2xl w-full object-cover shadow-2xl"
-                style={{ maxHeight: '500px' }}
+                style={{ maxHeight: '480px' }}
               />
-              {/* Floating card */}
-              <div className="absolute -bottom-6 -right-6 glass rounded-xl px-5 py-4 shadow-xl">
-                <p className="text-gold text-3xl font-bold">3+</p>
-                <p className="text-text-muted text-sm">Years Learning</p>
+              {/* Experience badge */}
+              <div className="absolute -bottom-5 -right-5 glass-card px-5 py-4 text-center">
+                <p className="text-3xl font-extrabold text-gradient">3+</p>
+                <p className="text-[#7a7a8c] text-xs mt-0.5">Years Learning</p>
               </div>
             </div>
           </div>
 
-          {/* Content side */}
-          <div className={`reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.25s' }}>
+          {/* ── RIGHT: Content ── */}
+          <div className={`reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.2s' }}>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+              I'm <span className="text-gradient">{personalInfo.name}</span>
+            </h3>
+            <p className="text-gold text-sm font-medium mb-6">{personalInfo.title}</p>
+
+            {/* Divider */}
+            <div className="divider mb-6" />
+
             {personalInfo.bio.split('\n\n').map((para, i) => (
-              <p key={i} className="text-text-muted leading-relaxed mb-5 text-base">
+              <p key={i} className="text-[#7a7a8c] leading-relaxed mb-4 text-sm md:text-base">
                 {para}
               </p>
             ))}
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 mt-8">
-              {stats.map(({ value, label }) => (
-                <div
-                  key={label}
-                  className="text-center p-4 rounded-xl bg-dark/50 border border-white/5"
-                >
-                  <p className="text-3xl font-bold text-gradient mb-1">{value}</p>
-                  <p className="text-text-muted text-xs">{label}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Quick info */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {/* Info Grid */}
+            <div className="grid grid-cols-2 gap-4 mt-8">
               {[
-                { icon: 'fas fa-envelope', label: 'Email', value: personalInfo.email },
-                { icon: 'fas fa-phone', label: 'Phone', value: personalInfo.phone },
-                { icon: 'fas fa-map-marker-alt', label: 'Location', value: personalInfo.location },
-                { icon: 'fas fa-briefcase', label: 'Role', value: personalInfo.title },
+                { icon: 'fa-envelope', label: 'Email', value: personalInfo.email },
+                { icon: 'fa-phone', label: 'Phone', value: personalInfo.phone },
+                { icon: 'fa-map-marker-alt', label: 'Location', value: personalInfo.location },
+                { icon: 'fa-briefcase', label: 'Role', value: personalInfo.title },
               ].map(({ icon, label, value }) => (
-                <div key={label} className="flex items-center gap-3 text-sm">
-                  <div className="w-9 h-9 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
-                    <i className={`${icon} text-gold text-sm`} />
+                <div key={label} className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-gold/[0.08] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <i className={`fas ${icon} text-gold text-xs`} />
                   </div>
                   <div>
-                    <p className="text-text-muted text-xs">{label}</p>
-                    <p className="text-white text-sm font-medium truncate">{value}</p>
+                    <p className="text-[#4a4a5c] text-xs">{label}</p>
+                    <p className="text-white text-sm font-medium leading-tight">{value}</p>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* CTA */}
-            <div className="flex items-center gap-4 mt-8">
-              <a href={`#contact`} className="btn-primary text-sm">
+            <div className="flex flex-wrap items-center gap-4 mt-10">
+              <a href="#contact" className="btn-gold text-sm px-6 py-3">
                 <i className="fas fa-paper-plane" />
                 Let's Talk
               </a>
-              <a href="/Engr-Najib-CV.pdf" download className="btn-outline text-sm">
+              <a href="/Engr-Najib-CV.pdf" download className="btn-outline text-sm px-6 py-3">
                 <i className="fas fa-download" />
                 Download CV
               </a>

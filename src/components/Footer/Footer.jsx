@@ -1,105 +1,81 @@
 import { personalInfo } from '../../data/personalInfo';
 
-const footerLinks = [
-  { label: 'Home', to: 'hero' },
-  { label: 'About', to: 'about' },
-  { label: 'Skills', to: 'skills' },
-  { label: 'Projects', to: 'projects' },
-  { label: 'Education', to: 'education' },
-  { label: 'Contact', to: 'contact' },
-];
-
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark border-t border-white/5">
-      <div className="max-w-6xl mx-auto px-6 py-16">
+    <footer className="bg-[#0b0b0f] border-t border-white/[0.05]">
+      <div className="max-w-6xl mx-auto px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
           <div>
-            <h2 className="text-2xl font-bold text-gradient mb-4">
-              {'<'}NAJIB<span className="text-gold">/</span>{'>'}
+            <h2 className="text-2xl font-extrabold text-gradient mb-4">
+              NAJIB<span className="text-gold">.</span>
             </h2>
-            <p className="text-text-muted text-sm leading-relaxed mb-6">
-              Front-End Developer crafting clean, responsive, and user-friendly web experiences.
-              Let's build something great together.
+            <p className="text-[#7a7a8c] text-sm leading-relaxed mb-6">
+              Front-End Developer crafting clean, responsive web experiences.
+              Let's build something exceptional together.
             </p>
             <div className="flex gap-3">
               {[
-                { icon: 'fab fa-github', href: personalInfo.github, label: 'GitHub' },
-                { icon: 'fab fa-linkedin-in', href: personalInfo.linkedin, label: 'LinkedIn' },
-                { icon: 'fab fa-facebook-f', href: personalInfo.facebook, label: 'Facebook' },
-                { icon: 'fab fa-whatsapp', href: personalInfo.whatsapp, label: 'WhatsApp' },
-              ].map(({ icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-text-muted hover:text-gold hover:bg-gold/10 transition-all"
-                >
-                  <i className={icon} />
+                { icon: 'fab fa-github', href: personalInfo.github },
+                { icon: 'fab fa-linkedin-in', href: personalInfo.linkedin },
+                { icon: 'fab fa-facebook-f', href: personalInfo.facebook },
+                { icon: 'fab fa-whatsapp', href: personalInfo.whatsapp },
+              ].map(({ icon, href }) => (
+                <a key={icon} href={href} target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-white/[0.03] flex items-center justify-center text-[#7a7a8c] hover:text-gold hover:bg-gold/[0.08] transition-all">
+                  <i className={`${icon} text-sm`} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Navigation */}
           <div>
-            <h3 className="text-white font-semibold mb-5">Quick Links</h3>
+            <h3 className="text-white font-bold text-sm mb-5">Navigation</h3>
             <ul className="space-y-3">
-              {footerLinks.map(({ label, to }) => (
-                <li key={to}>
-                  <a
-                    href={`#${to}`}
-                    className="text-text-muted text-sm hover:text-gold transition-colors flex items-center gap-2"
-                  >
-                    <i className="fas fa-chevron-right text-xs text-gold/40" />
-                    {label}
+              {['hero', 'about', 'skills', 'experience', 'projects', 'education', 'contact'].map((id) => (
+                <li key={id}>
+                  <a href={`#${id}`}
+                    className="text-[#7a7a8c] text-sm hover:text-gold transition-colors flex items-center gap-2">
+                    <i className="fas fa-chevron-right text-[8px] text-gold/40" />
+                    {id.charAt(0).toUpperCase() + id.slice(1)}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact */}
           <div>
-            <h3 className="text-white font-semibold mb-5">Get in Touch</h3>
+            <h3 className="text-white font-bold text-sm mb-5">Get in Touch</h3>
             <ul className="space-y-3">
               {[
-                { icon: 'fas fa-envelope', text: personalInfo.email },
-                { icon: 'fas fa-phone', text: personalInfo.phone },
-                { icon: 'fas fa-map-marker-alt', text: personalInfo.location },
+                { icon: 'fa-envelope', text: personalInfo.email },
+                { icon: 'fa-phone', text: personalInfo.phone },
+                { icon: 'fa-map-marker-alt', text: personalInfo.location },
               ].map(({ icon, text }) => (
-                <li key={text} className="flex items-center gap-3 text-text-muted text-sm">
-                  <i className={`${icon} text-gold/60 text-sm`} />
+                <li key={text} className="flex items-center gap-3 text-[#7a7a8c] text-sm">
+                  <i className={`fas ${icon} text-gold/50 text-xs`} />
                   {text}
                 </li>
               ))}
             </ul>
-
-            <a
-              href="/Engr-Najib-CV.pdf"
-              download
-              className="btn-primary text-sm py-2.5 px-5 mt-6 inline-flex"
-            >
-              <i className="fas fa-download text-xs" />
+            <a href="/Engr-Najib-CV.pdf" download className="btn-gold text-xs py-2.5 px-5 mt-6 inline-flex">
+              <i className="fas fa-download text-[10px]" />
               Download Resume
             </a>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-text-muted text-sm text-center md:text-left">
+        {/* Bottom */}
+        <div className="mt-12 pt-8 border-t border-white/[0.05] flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-[#4a4a5c] text-xs text-center md:text-left">
             © {year} {personalInfo.name}. All rights reserved.
           </p>
-          <p className="text-text-muted text-sm">
-            Designed & built with{' '}
-            <i className="fas fa-heart text-gold text-xs" />{' '}
-            using React.js & Tailwind CSS
+          <p className="text-[#4a4a5c] text-xs flex items-center gap-1.5">
+            Built with <i className="fas fa-heart text-gold text-[10px]" /> using React.js & Tailwind CSS
           </p>
         </div>
       </div>

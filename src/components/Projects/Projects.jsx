@@ -1,91 +1,79 @@
-import { useState } from 'react';
-import SectionTitle from '../Common/SectionTitle';
-import { projects } from '../../data/projects';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { projects } from '../../data/projects';
 
 export default function Projects() {
-  const [activeFilter, setActiveFilter] = useState('All');
   const [ref, visible] = useScrollReveal({ threshold: 0.1 });
 
-  const filters = ['All', ...new Set(projects.map((p) => p.title.split(' ')[0]))].slice(0, 4);
-  const filtered = activeFilter === 'All' ? projects : projects.slice(0, 4);
-
   return (
-    <section id="projects" className="section-pad bg-dark relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-gold/[0.03] rounded-full blur-3xl -translate-y-1/2" />
+    <section id="projects" className="section bg-[#111117] relative overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-[20%] right-[-10%] w-[500px] h-[500px] bg-gold/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-6">
-        <SectionTitle
-          eyebrow="Portfolio"
-          title="Featured Projects"
-          subtitle="A selection of my front-end development work showcasing responsive design and interactive interfaces."
-        />
+      <div className="relative z-10 max-w-6xl mx-auto px-8">
+        {/* Header */}
+        <div ref={ref} className={`text-center mb-16 reveal ${visible ? 'visible' : ''}`}>
+          <p className="text-gold text-xs font-bold tracking-[0.3em] uppercase mb-3">My Work</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Featured Projects</h2>
+          <div className="divider divider-center" />
+        </div>
 
+        {/* Project Grid */}
         <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((project, i) => (
+          {projects.map((project, i) => (
             <div
               key={project.id}
-              className={`card overflow-hidden group reveal ${visible ? 'visible' : ''}`}
+              className={`project-card reveal ${visible ? 'visible' : ''}`}
               style={{ transitionDelay: `${i * 0.1}s` }}
             >
               {/* Image */}
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden" style={{ height: '220px' }}>
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  style={{ height: '220px' }}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                  {project.siteUrl && (
-                    <button
-                      onClick={() => window.open(project.siteUrl, '_blank')}
-                      className="btn-primary text-sm py-2 px-4"
-                    >
-                      <i className="fas fa-external-link-alt" />
-                      Live Demo
-                    </button>
-                  )}
-                  {project.githubUrl && (
-                    <button
-                      onClick={() => window.open(project.githubUrl, '_blank')}
-                      className="btn-outline text-sm py-2 px-4"
-                    >
-                      <i className="fab fa-github" />
-                      Code
-                    </button>
-                  )}
-                </div>
+              </div>
+
+              {/* Overlay buttons */}
+              <div className="overlay">
+                {project.siteUrl && (
+                  <button onClick={() => window.open(project.siteUrl, '_blank')}>
+                    <i className="fas fa-external-link-alt text-xs" />
+                    Live Demo
+                  </button>
+                )}
+                {project.githubUrl && (
+                  <button onClick={() => window.open(project.githubUrl, '_blank')}>
+                    <i className="fab fa-github text-xs" />
+                    Source
+                  </button>
+                )}
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-gold transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-text-muted text-sm leading-relaxed mb-4">
+                <h3 className="text-white font-bold text-base mb-2">{project.title}</h3>
+                <p className="text-[#7a7a8c] text-xs leading-relaxed mb-4 line-clamp-2">
                   {project.description}
                 </p>
 
                 {/* Tech badges */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech) => (
-                    <span key={tech} className="skill-badge text-xs py-1 px-3">
+                    <span key={tech} className="skill-badge text-[11px] py-1 px-3">
                       {tech}
                     </span>
                   ))}
                 </div>
 
                 {/* Meta */}
-                <div className="flex items-center justify-between text-xs text-text-muted pt-3 border-t border-white/5">
+                <div className="flex items-center justify-between text-[10px] text-[#4a4a5c] pt-3 border-t border-white/[0.05]">
                   <span className="flex items-center gap-1">
-                    <i className="fas fa-user text-gold/60" />
+                    <i className="fas fa-user text-gold/50" />
                     {project.role}
                   </span>
                   <span className="flex items-center gap-1">
-                    <i className="fas fa-clock text-gold/60" />
+                    <i className="fas fa-clock text-gold/50" />
                     {project.duration}
                   </span>
                 </div>
@@ -94,14 +82,14 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* View All CTA */}
-        <div className="text-center mt-12 reveal" style={{ transitionDelay: '0.4s' }}>
-          <p className="text-text-muted mb-4 text-sm">More projects available on GitHub</p>
+        {/* GitHub CTA */}
+        <div ref={ref} className={`text-center mt-16 reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.5s' }}>
+          <p className="text-[#4a4a5c] text-xs tracking-widest uppercase mb-4">More on GitHub</p>
           <a
             href="https://github.com/najib-ullah12345"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline inline-flex"
+            className="btn-outline inline-flex text-sm px-8 py-3"
           >
             <i className="fab fa-github" />
             View GitHub Profile

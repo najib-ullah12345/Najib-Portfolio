@@ -8,7 +8,7 @@ With hands-on experience in React.js, JavaScript, HTML, CSS, and Tailwind CSS, I
   email: 'najibullah0048@gmail.com',
   phone: '+92 344 658 0048',
   location: 'Rawalpindi, Pakistan',
-  linkedin: 'https://www.linkedin.com/in/najib-ullah-khan-65b298267/',
+  linkedin: 'https://www.linkedin.com/in/najibullah0048/',
   facebook: 'https://www.facebook.com/profile.php?id=61551044190342',
   whatsapp: 'https://wa.me/03446580048',
   github: 'https://github.com/najib-ullah12345',

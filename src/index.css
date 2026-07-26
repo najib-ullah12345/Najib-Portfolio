@@ -6,30 +6,46 @@
 /* ── Base Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0b0b0f;
+  color: #e0e0e8;
+  overflow-x: hidden;
+}
 img { max-width: 100%; display: block; }
 a { text-decoration: none; }
 
 /* ── Theme ── */
 :root {
-  --gold: #d4af37;
-  --gold-light: #f0d060;
-  --dark: #0a0a0f;
-  --dark-2: #111118;
-  --dark-3: #1a1a25;
-  --gray: #2a2a3a;
+  --gold: #c1a46a;
+  --gold-light: #e8d5a3;
+  --gold-dark: #8a6f3e;
+  --dark: #0b0b0f;
+  --dark-2: #111117;
+  --dark-3: #18181f;
+  --dark-4: #1f1f28;
+  --border: rgba(255,255,255,0.07);
   --text: #e0e0e8;
-  --text-muted: #8888a0;
+  --text-muted: #7a7a8c;
+  --text-dim: #4a4a5c;
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--dark); }
 ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
 
-/* ── Animations ── */
+/* ── Background Grid ── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ── Keyframe Animations ── */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
+  from { opacity: 0; transform: translateY(50px); }
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeIn {
@@ -37,167 +53,279 @@ a { text-decoration: none; }
   to { opacity: 1; }
 }
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-40px); }
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
   to { opacity: 1; transform: translateX(0); }
 }
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
-@keyframes pulse-ring {
-  0% { transform: scale(0.8); opacity: 0.6; }
-  100% { transform: scale(1.4); opacity: 0; }
+@keyframes ping-slow {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes progressFill {
+  from { width: 0; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-.animate-fade-up { animation: fadeInUp 0.7s ease-out forwards; }
+.animate-fade-up { animation: fadeInUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
 .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
-.animate-slide-left { animation: slideInLeft 0.7s ease-out forwards; }
-.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-slide-left { animation: slideInLeft 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-slide-right { animation: slideInRight 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-blink { animation: blink 1s step-end infinite; }
+.animate-scale-in { animation: scaleIn 0.5s ease-out forwards; }
 
-/* ── Glass Card ── */
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* ── Gold Gradient Text ── */
+/* ── Gradient Text ── */
 .text-gradient {
   background: linear-gradient(135deg, var(--gold-light), var(--gold));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+.text-gradient-subtle {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-/* ── Button ── */
-.btn-primary {
+/* ── Buttons ── */
+.btn-gold {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   background: linear-gradient(135deg, var(--gold-light), var(--gold));
-  color: #0a0a0f;
-  font-weight: 600;
-  padding: 12px 28px;
+  color: #0b0b0f;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 14px 32px;
   border-radius: 50px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+  letter-spacing: 0.02em;
 }
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.35);
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(193,164,106,0.35);
 }
+.btn-gold:active { transform: translateY(-1px); }
+
 .btn-outline {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   background: transparent;
   color: var(--gold);
-  font-weight: 600;
-  padding: 11px 28px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 13px 32px;
   border-radius: 50px;
   border: 2px solid var(--gold);
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+  letter-spacing: 0.02em;
 }
 .btn-outline:hover {
   background: var(--gold);
-  color: #0a0a0f;
-  transform: translateY(-2px);
+  color: #0b0b0f;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(193,164,106,0.25);
+}
+
+/* ── Glass Card ── */
+.glass-card {
+  background: rgba(255,255,255,0.025);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.glass-card:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(193,164,106,0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
 }
 
 /* ── Section ── */
-.section-pad { padding: 100px 0; }
+.section { padding: 120px 0; }
+.section-sm { padding: 80px 0; }
 
-/* ── Badge ── */
+/* ── Avatar Ring ── */
+.avatar-ring {
+  position: relative;
+  padding: 6px;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  border-radius: 50%;
+}
+.avatar-ring::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  opacity: 0.3;
+  animation: ping-slow 2.5s ease-out infinite;
+}
+
+/* ── Stat Card ── */
+.stat-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.stat-card:hover {
+  background: rgba(193,164,106,0.05);
+  border-color: rgba(193,164,106,0.2);
+}
+
+/* ── Skill Badge ── */
 .skill-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  background: rgba(193,164,106,0.08);
+  border: 1px solid rgba(193,164,106,0.2);
   color: var(--gold);
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: 50px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 500;
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
 }
 .skill-badge:hover {
-  background: rgba(212, 175, 55, 0.2);
-  border-color: var(--gold);
+  background: rgba(193,164,106,0.15);
+  border-color: rgba(193,164,106,0.4);
   transform: translateY(-2px);
 }
 
 /* ── Progress Bar ── */
-.progress-bar {
-  height: 6px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 3px;
+.progress-track {
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
   overflow: hidden;
 }
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--gold), var(--gold-light));
-  border-radius: 3px;
-  transition: width 1s ease-out;
-}
-
-/* ── Card ── */
-.card {
-  background: var(--dark-2);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 16px;
-  transition: all 0.4s ease;
-}
-.card:hover {
-  border-color: rgba(212,175,55,0.2);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light));
+  border-radius: 2px;
+  transform-origin: left;
 }
 
 /* ── Timeline ── */
-.timeline-item {
-  position: relative;
-  padding-left: 32px;
-  padding-bottom: 40px;
-}
-.timeline-item::before {
-  content: '';
+.timeline-line {
   position: absolute;
   left: 0;
-  top: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+}
+.timeline-dot {
+  position: absolute;
+  left: -5px;
+  top: 6px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
   background: var(--gold);
-  box-shadow: 0 0 0 4px rgba(212,175,55,0.15);
+  box-shadow: 0 0 0 4px rgba(193,164,106,0.15);
 }
-.timeline-item::after {
-  content: '';
+
+/* ── Section Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Navbar ── */
+.navbar {
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.navbar a {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+.navbar a:hover, .navbar a.active {
+  color: var(--gold);
+  background: rgba(193,164,106,0.08);
+}
+
+/* ── Project Card ── */
+.project-card {
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--dark-3);
+  border: 1px solid var(--border);
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(193,164,106,0.2);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+}
+.project-card .overlay {
   position: absolute;
-  left: 5px;
-  top: 24px;
-  width: 2px;
-  height: calc(100% - 24px);
-  background: rgba(255,255,255,0.06);
+  inset: 0;
+  background: rgba(11,11,15,0.75);
+  opacity: 0;
+  transition: opacity 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 20px;
 }
-.timeline-item:last-child::after { display: none; }
+.project-card:hover .overlay { opacity: 1; }
+.project-card .overlay button {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: #0b0b0f;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.3s;
+}
+.project-card .overlay button:hover { transform: scale(1.05); }
 
-/* ── Stagger Children ── */
-.stagger > * { opacity: 0; }
-.stagger.visible > * { animation: fadeInUp 0.6s ease-out forwards; }
-.stagger.visible > *:nth-child(1) { animation-delay: 0.05s; }
-.stagger.visible > *:nth-child(2) { animation-delay: 0.1s; }
-.stagger.visible > *:nth-child(3) { animation-delay: 0.15s; }
-.stagger.visible > *:nth-child(4) { animation-delay: 0.2s; }
-.stagger.visible > *:nth-child(5) { animation-delay: 0.25s; }
-.stagger.visible > *:nth-child(6) { animation-delay: 0.3s; }
-.stagger.visible > *:nth-child(7) { animation-delay: 0.35s; }
-.stagger.visible > *:nth-child(8) { animation-delay: 0.4s; }
-
-/* ── Reveal ── */
-.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+/* ── Divider ── */
+.divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+  border-radius: 2px;
+}
+.divider-center { margin: 0 auto; }

@@ -9,15 +9,16 @@ export default function SectionTitle({ eyebrow, title, subtitle, center = true }
       className={`mb-16 ${center ? 'text-center' : ''} reveal ${visible ? 'visible' : ''}`}
     >
       {eyebrow && (
-        <p className="text-gold text-sm font-semibold tracking-[0.2em] uppercase mb-3">
+        <p className="text-gold text-xs font-bold tracking-[0.3em] uppercase mb-3">
           {eyebrow}
         </p>
       )}
-      <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
         {title}
       </h2>
+      <div className={`divider ${center ? 'divider-center' : ''} mb-6`} />
       {subtitle && (
-        <p className="text-text-muted text-lg max-w-2xl mx-auto leading-relaxed">
+        <p className="text-[#7a7a8c] text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
           {subtitle}
         </p>
       )}

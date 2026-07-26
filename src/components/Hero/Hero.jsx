@@ -1,35 +1,33 @@
 import { useEffect, useState } from 'react';
 import { personalInfo } from '../../data/personalInfo';
 
-const TYPING_PHRASES = [
-  'Front-End Developer',
-  'React.js Enthusiast',
-  'UI/UX Designer',
-  'Web Craftsman',
-];
+const TYPING_PHRASES = ['Full Stack Developer', 'React.js Enthusiast', 'UI/UX Designer', 'Web Craftsman'];
 
 export default function Hero() {
-  const [phraseIndex, setPhraseIndex] = useState(0);
   const [displayed, setDisplayed] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     const phrase = TYPING_PHRASES[phraseIndex];
-    const speed = isDeleting ? 40 : 80;
+    const speed = isDeleting ? 35 : 80;
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
         if (displayed.length < phrase.length) {
           setDisplayed(phrase.slice(0, displayed.length + 1));
         } else {
-          setTimeout(() => setIsDeleting(true), 1800);
+          setTimeout(() => setIsDeleting(true), 2000);
         }
       } else {
         if (displayed.length > 0) {
           setDisplayed(phrase.slice(0, displayed.length - 1));
         } else {
           setIsDeleting(false);
-          setPhraseIndex((prev) => (prev + 1) % TYPING_PHRASES.length);
+          setPhraseIndex((p) => (p + 1) % TYPING_PHRASES.length);
         }
       }
     }, speed);
@@ -40,110 +38,102 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #0a0a0f 0%, #111118 50%, #0a0a0f 100%)',
-      }}
+      className="relative min-h-screen flex items-center overflow-hidden bg-grid"
+      style={{ background: '#0b0b0f' }}
     >
-      {/* Background grid */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
+      {/* Ambient glow */}
+      <div className="absolute top-[-10%] right-[10%] w-[600px] h-[600px] bg-gold/[0.04] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[5%] left-[5%] w-[400px] h-[400px] bg-gold/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gold/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+      <div className="relative z-10 max-w-6xl mx-auto px-8 w-full py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        {/* Availability badge */}
-        <div
-          className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full border border-gold/20 bg-gold/5 animate-fade-in"
-          style={{ animationDelay: '0.2s' }}
-        >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-gold text-sm font-medium">{personalInfo.availability}</span>
-        </div>
+          {/* ── LEFT: Text Content ── */}
+          <div className={`${mounted ? 'animate-slide-left' : 'opacity-0'}`}>
+            <p className="text-gold text-sm font-semibold tracking-[0.25em] uppercase mb-4">
+              Hi, I'm
+            </p>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-3 leading-[1.05]">
+              Najib Ullah<br />
+              <span className="text-gradient">Khan</span>
+            </h1>
 
-        {/* Name */}
-        <h1
-          className="text-5xl md:text-7xl font-extrabold text-white mb-4 animate-fade-up"
-          style={{ animationDelay: '0.3s' }}
-        >
-          {personalInfo.name}
-        </h1>
+            {/* Typewriter */}
+            <div className="flex items-center gap-2 mb-6 h-10">
+              <span className="text-xl md:text-2xl font-semibold text-[#7a7a8c]">
+                A
+              </span>
+              <span className="text-xl md:text-2xl font-bold text-gradient">
+                {displayed}
+              </span>
+              <span className="text-gold text-2xl animate-blink">|</span>
+            </div>
 
-        {/* Typing animation */}
-        <div
-          className="text-2xl md:text-4xl font-semibold mb-6 h-12 animate-fade-up"
-          style={{ animationDelay: '0.5s' }}
-        >
-          <span className="text-gradient">{displayed}</span>
-          <span className="text-gold ml-1 animate-pulse">|</span>
-        </div>
+            <p className="text-[#7a7a8c] text-base md:text-lg leading-relaxed mb-8 max-w-md">
+              {personalInfo.tagline}
+            </p>
 
-        {/* Tagline */}
-        <p
-          className="text-text-muted text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-up"
-          style={{ animationDelay: '0.7s' }}
-        >
-          {personalInfo.tagline}
-        </p>
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4">
+              <a href="#projects" className="btn-gold text-sm px-7 py-3.5">
+                <i className="fas fa-folder-open" />
+                View My Work
+              </a>
+              <a href="#contact" className="btn-outline text-sm px-7 py-3.5">
+                <i className="fas fa-paper-plane" />
+                Hire Me
+              </a>
+            </div>
 
-        {/* CTA Buttons */}
-        <div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up"
-          style={{ animationDelay: '0.9s' }}
-        >
-          <a
-            href={`#projects`}
-            className="btn-primary text-base px-8 py-3.5"
-          >
-            <i className="fas fa-folder-open" />
-            View Projects
-          </a>
-          <a
-            href={`#contact`}
-            className="btn-outline text-base px-8 py-3.5"
-          >
-            <i className="fas fa-paper-plane" />
-            Get in Touch
-          </a>
-        </div>
+            {/* Stats row */}
+            <div className="flex gap-8 mt-12 pt-8 border-t border-white/[0.06]">
+              {[
+                { num: '7+', label: 'Projects' },
+                { num: '3+', label: 'Certifications' },
+                { num: '1', label: 'Internship' },
+              ].map(({ num, label }) => (
+                <div key={label}>
+                  <p className="text-3xl font-extrabold text-gradient">{num}</p>
+                  <p className="text-[#7a7a8c] text-xs mt-1">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        {/* Social Links */}
-        <div
-          className="flex items-center justify-center gap-4 mt-12 animate-fade-up"
-          style={{ animationDelay: '1.1s' }}
-        >
-          {[
-            { icon: 'fab fa-github', href: personalInfo.github, label: 'GitHub' },
-            { icon: 'fab fa-linkedin-in', href: personalInfo.linkedin, label: 'LinkedIn' },
-            { icon: 'fab fa-facebook-f', href: personalInfo.facebook, label: 'Facebook' },
-            { icon: 'fab fa-whatsapp', href: personalInfo.whatsapp, label: 'WhatsApp' },
-          ].map(({ icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-text-muted hover:text-gold hover:border-gold/30 transition-all duration-300 hover:scale-110"
-            >
-              <i className={icon} />
-            </a>
-          ))}
+          {/* ── RIGHT: Avatar ── */}
+          <div className={`flex justify-center lg:justify-end ${mounted ? 'animate-slide-right' : 'opacity-0'}`}>
+            <div className="relative">
+              {/* Avatar ring */}
+              <div className="avatar-ring">
+                <img
+                  src="/images/pic.jpeg"
+                  alt={personalInfo.name}
+                  className="w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-full object-cover"
+                />
+              </div>
+
+              {/* Floating status */}
+              <div className="absolute -bottom-4 -left-4 glass-card px-4 py-3 flex items-center gap-3">
+                <div className="relative">
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-400 block" />
+                  <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-60" />
+                </div>
+                <span className="text-white text-xs font-medium">Available for work</span>
+              </div>
+
+              {/* Floating badge */}
+              <div className="absolute -top-3 -right-3 glass-card px-4 py-2.5">
+                <p className="text-gold text-xs font-bold">Front-End</p>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         {/* Scroll indicator */}
-        <div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce"
-          style={{ animationDelay: '1.5s' }}
-        >
-          <i className="fas fa-chevron-down text-gold/40 text-xl" />
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+          <span className="text-[#4a4a5c] text-xs tracking-widest uppercase">Scroll</span>
+          <div className="w-px h-12 bg-gradient-to-b from-gold/40 to-transparent" />
         </div>
       </div>
     </section>

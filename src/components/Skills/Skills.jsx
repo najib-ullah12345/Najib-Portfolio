@@ -1,61 +1,56 @@
-import { useState } from 'react';
-import SectionTitle from '../Common/SectionTitle';
-import { skills } from '../../data/skills';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { skills } from '../../data/skills';
 
-const icons = {
-  Monitor: 'fas fa-desktop',
-  Palette: 'fas fa-palette',
-  Wrench: 'fas fa-wrench',
+const categoryIcons = {
+  Frontend: 'fa-desktop',
+  'Styling & UI': 'fa-palette',
+  'Tools & Version Control': 'fa-wrench',
 };
 
 export default function Skills() {
-  const [ref, visible] = useScrollReveal({ threshold: 0.2 });
+  const [ref, visible] = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <section id="skills" className="section-pad bg-dark relative">
-      {/* Subtle grid */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
-        backgroundSize: '40px 40px',
-      }} />
+    <section id="skills" className="section bg-[#111117] relative">
+      <div className="absolute inset-0 bg-grid opacity-30" />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <SectionTitle
-          eyebrow="Technical Skills"
-          title="My Tech Stack"
-          subtitle="Technologies and tools I use to bring ideas to life."
-        />
+      <div className="relative z-10 max-w-6xl mx-auto px-8">
+        {/* Header */}
+        <div ref={ref} className={`text-center mb-16 reveal ${visible ? 'visible' : ''}`}>
+          <p className="text-gold text-xs font-bold tracking-[0.3em] uppercase mb-3">What I know</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Technical Skills</h2>
+          <div className="divider divider-center" />
+        </div>
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Skill Groups */}
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {skills.map((group, gi) => (
             <div
               key={group.category}
-              className={`card p-8 reveal ${visible ? 'visible' : ''}`}
-              style={{ transitionDelay: `${gi * 0.12}s` }}
+              className={`glass-card p-8 reveal ${visible ? 'visible' : ''}`}
+              style={{ transitionDelay: `${gi * 0.15}s` }}
             >
-              {/* Category Header */}
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center">
-                  <i className={`${icons[group.icon] || 'fas fa-code'} text-gold text-lg`} />
-                </div>
-                <h3 className="text-lg font-semibold text-white">{group.category}</h3>
+              {/* Icon */}
+              <div className="w-14 h-14 rounded-2xl bg-gold/[0.08] flex items-center justify-center mb-8">
+                <i className={`fas ${categoryIcons[group.category] || 'fa-code'} text-gold text-xl`} />
               </div>
 
-              {/* Skills */}
-              <div className="space-y-5">
+              <h3 className="text-white font-bold text-lg mb-8">{group.category}</h3>
+
+              {/* Skills with progress */}
+              <div className="space-y-6">
                 {group.items.map((skill) => (
                   <div key={skill.name}>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-white/90">{skill.name}</span>
-                      <span className="text-xs text-gold font-semibold">{skill.level}%</span>
+                      <span className="text-sm font-medium text-[#c0c0d0]">{skill.name}</span>
+                      <span className="text-xs text-gold font-bold">{skill.level}%</span>
                     </div>
-                    <div className="progress-bar">
+                    <div className="progress-track">
                       <div
                         className="progress-fill"
                         style={{
                           width: visible ? `${skill.level}%` : '0%',
-                          transitionDelay: `${gi * 0.12 + 0.3}s`,
+                          transitionDelay: `${gi * 0.15 + 0.3}s`,
                         }}
                       />
                     </div>
@@ -66,15 +61,14 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Additional Skill Badges */}
-        <div ref={ref} className={`mt-16 reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.4s' }}>
-          <p className="text-center text-text-muted mb-6 text-sm font-medium tracking-wider uppercase">
+        {/* Additional Skills Badges */}
+        <div ref={ref} className={`text-center reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.5s' }}>
+          <p className="text-[#4a4a5c] text-xs font-bold tracking-[0.2em] uppercase mb-6">
             Also Familiar With
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {['WordPress', 'Laravel', 'Vue.js', 'REST APIs', 'Responsive Design', 'Figma', 'npm', 'Vite'].map((s) => (
+            {['WordPress', 'Laravel', 'Vue.js', 'REST APIs', 'Responsive Design', 'Figma', 'npm', 'Vite', 'Git'].map((s) => (
               <span key={s} className="skill-badge">
-                <i className="fas fa-check text-xs text-gold/70" />
                 {s}
               </span>
             ))}
